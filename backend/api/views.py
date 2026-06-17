@@ -16,3 +16,5 @@ def cors_response(response):
     response["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,PATCH,OP"
     response["Access-Control-Allow-Header"] = "Control-Type"
     return response
+
+
