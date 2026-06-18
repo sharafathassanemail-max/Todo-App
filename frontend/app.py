@@ -42,6 +42,25 @@ if add_button and new_task:
 col1, col2 = st.columns([3,1])
 with col1:
     st.subheader("Your Tasks:")
+    # fetching todos from the API
+    try:
+        response = requests.get(f"{API_URL}todos/")
+
+        if response.status_code==200:
+            data = response.json()
+            todos = data.get("todos",[])
+
+            if not todos:
+                st.info("No Task is Add Yet")
+            else:
+                #displaying todos
+                for todo in todos:
+                    with st.container():
+                        col_check,col_title,col_date,col_delete = st.columns(4)
+
+                        #check boxes for complection of todo
+                        with col_check:
+                            completed=st.checkbox("",value=todo["completed"],key=f"check_{todo['id']}")
 
 with col2:
     st.subheader("Statistics of all Tasks")
